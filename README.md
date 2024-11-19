@@ -1,3 +1,27 @@
+### Add a Country
+![AddCountry](images/Postman_Request_01.png)
+
+### Add a Country
+![Add Country](images/Postman_Request_02.png)
+
+### Get All Countries
+![GetAllCountries](images/Postman_GET_countries.png)
+
+### Find a Country by ID
+![FindCountryByID](images/Postman_FindOne.png)
+
+### Update the Active Status of a Country
+![UpdateCountry](images/Update.png)
+
+### Check the Update
+![UpdateCheck](images/Update_check.png)
+
+### Delete a Country
+![DeleteCountry](images/delete.png)
+
+### Check the Deletion 
+![DeleteCheck](images/delete_check.png)
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
