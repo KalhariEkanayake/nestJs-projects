@@ -35,35 +35,35 @@ Postman for API endpoint validation.
 ## Setup Instructions
 
 Follow these steps to set up and test the API locally:
-1. Clone the repository:
+***1. Clone the repository:***
 ```
 $ git clone https://github.com/KalhariEkanayake/nestJs-projects.git
 $ cd pg-crud
 ```
 
-2. Install dependencies:
+***2. Install dependencies:***
 ```
 $ npm install
 ```
 
-4. Start the server:
+***3. Start the server:***
 ```
 $ npm run start
 ```
 
-6. Test the API Endpoints:
-Use Postman or any API testing tool to test the endpoints at ```http://localhost:3000```.
+***4. Test the API Endpoints:***
+Use ***Postman*** or any API testing tool to test the endpoints at ```http://localhost:3000```.
 
 ## API Endpoints
-- POST ```/countries```: Add a new country.
-- GET ```/countries```: Retrieve all countries.
-- PATCH ```/countries/:id```: Update a country by ID.
-- DELETE ```/countries/:id```: Delete a country by ID.
+- ***POST*** ```/countries```: Add a new country.
+- ***GET*** ```/countries```: Retrieve all countries.
+- ***PATCH*** ```/countries/:id```: Update a country by ID.
+- ***DELETE*** ```/countries/:id```: Delete a country by ID.
 
 ## Postman Testing Example
-The following image demonstrates how the API endpoints were tested using Postman:
+The following image demonstrates how the API endpoints were tested using ***Postman***:
 
-Below screenshot showcases a POST request to the ```/countries``` endpoint, where a new country ("England") is created. The server responds with the created record, including its unique ID.
+Below screenshot showcases a ***POST*** request to the ```/countries``` endpoint, where a new country ("England") is created. The server responds with the created record, including its unique ID.
 
 ### Add a Country
 ![AddCountry](images/Postman_Request_01.png)
