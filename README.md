@@ -11,25 +11,25 @@ This project is created to:
 - Showcase testing of APIs using ***Postman***.
 
 ## Features
-- CRUD Operations:
+- ***CRUD Operations:***
 Perform Create, Read, Update, and Delete operations on PostgreSQL entities.
-- API Endpoints:
+- ***API Endpoints:***
 RESTful endpoints designed for seamless interaction with the database.
-- Database Integration:
+- ***Database Integration:***
 Efficient handling of relational data using ***TypeORM***.
-- Validation and Testing:
+- ***Validation and Testing:***
 API endpoints tested and validated using ***Postman***.
-- Scalable Framework:
+- ***Scalable Framework:***
 Built using ***NestJS***, following modular architecture for scalability and maintainability.
 
 ## Tech Stack
-- Framework:
+- ***Framework:***
 NestJS (Node.js framework).
-- Database:
+- ***Database:***
 PostgreSQL.
-- ORM:
+- ***ORM:***
 TypeORM for object-relational mapping.
-- Testing Tool:
+- ***Testing Tool:***
 Postman for API endpoint validation.
 
 ## Setup Instructions
