@@ -22,7 +22,7 @@ import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
           from: 'Becodemy',
         },
         template: {
-          dir: join(__dirname, '../../../apps/api-users/email-templates'),
+          dir: join(process.cwd(), 'email-templates'), // Correct absolute path
           adapter: new EjsAdapter(),
           options: {
             strict: false,
@@ -34,5 +34,6 @@ import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
   ],
 
   providers: [EmailService],
+
 })
 export class EmailModule {}
