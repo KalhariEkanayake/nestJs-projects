@@ -31,6 +31,12 @@ export class User {
     @Field()
     password: string;
 
+    @Field({ nullable: true })
+    address?: string;
+
+    @Field({ nullable: true })
+    phone_number: number;
+
     @Field(() => Avatars, { nullable: true })
     avatar?: Avatars | null;
 
