@@ -1,13 +1,18 @@
 import { Module } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloFederationDriver, ApolloFederationDriverConfig, } from '@nestjs/apollo';
+import {
+  ApolloFederationDriver,
+  ApolloFederationDriverConfig,
+} from '@nestjs/apollo';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from '../../../prisma/Prisma.service';
 import { UsersResolver } from './user.resolver';
 import { EmailModule } from './email/email.module';
 import { EmailService } from './email/email.service';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './guards/auth.guard';
 
 @Module({
   imports: [
@@ -29,7 +34,9 @@ import { EmailService } from './email/email.service';
     JwtService,
     PrismaService,
     UsersResolver,
-    EmailService
+    EmailService,
+    PrismaService,
+    { provide: APP_GUARD, useClass: AuthGuard }, // Global Guard
   ],
 })
 export class UsersModule {}

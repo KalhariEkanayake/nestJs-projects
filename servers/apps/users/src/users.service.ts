@@ -159,6 +159,16 @@ export class UsersService {
     return await bcrypt.compare(password, hashedPassword);
   }
 
+  // Get logged in user
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async getLoggedInUser(req: any) {
+    const user = req.user;
+    const refreshToken = req.refreshtoken;
+    const accessToken = req.accesstoken;
+    console.log({ user, refreshToken, accessToken });
+    return { user, refreshToken, accessToken };
+  }
+
   // Get all users service
   async getUsers() {
     return this.prisma.user.findMany({});
