@@ -34,9 +34,8 @@ import { AuthGuard } from './guards/auth.guard';
     JwtService,
     PrismaService,
     UsersResolver,
-    EmailService,
-    PrismaService,
-    { provide: APP_GUARD, useClass: AuthGuard }, // Global Guard
+    EmailService
   ],
+  exports: [PrismaService], 
 })
 export class UsersModule {}

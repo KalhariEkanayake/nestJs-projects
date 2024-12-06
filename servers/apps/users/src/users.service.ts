@@ -11,7 +11,7 @@ import { TokenSender } from './utils/sendToken';
 interface UserData {
   name: string;
   email: string;
-  password: String;
+  password: string;
   phone_number: number;
 }
 
@@ -70,7 +70,7 @@ export class UsersService {
       activationCode,
     });
 
-    return { activation_token: activationToken, response };
+    return { activation_token: activationToken.token, response };
   }
 
   // create activation token
@@ -132,13 +132,17 @@ export class UsersService {
     const { email, password } = loginDto;
     const user = await this.prisma.user.findUnique({
       where: {
-        email
+        email,
       },
     });
 
     if (user && (await this.comparePassword(password, user.password))) {
       const tokenSender = new TokenSender(this.configService, this.jwtService);
       return tokenSender.sendToken(user);
+      // const response = tokenSender.sendToken(user);
+      // console.log('Login Response:', response);
+      // return response;
+      
     } else {
       return {
         user: null,

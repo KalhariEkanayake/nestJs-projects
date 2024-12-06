@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { PrismaService } from '../../../../prisma/prisma.service';
+import { PrismaService } from '../../../../prisma/Prisma.service';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { decode } from 'punycode';
 
@@ -56,11 +56,11 @@ export class AuthGuard implements CanActivate {
       const refreshTokenData = req.headers.refreshtoken as string;
 
       const decoded = this.jwtService.verify(refreshTokenData, {
-        secret: this.config.get<string>('ACCESS_TOKEN_SECRET'),
+        secret: this.config.get<string>('REFRESH_TOKEN_SECRET'),
       });
 
       if (!decode) {
-        throw new UnauthorizedException('Invalid access token!');
+        throw new UnauthorizedException('Invalid refresh token!');
       }
 
       //   const expirationTime = decoded.exp * 1000;

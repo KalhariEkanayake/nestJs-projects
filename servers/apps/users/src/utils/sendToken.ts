@@ -15,7 +15,7 @@ export class TokenSender {
       },
       {
         secret: this.config.get<string>('ACCESS_TOKEN_SECRET'),
-        expiresIn: '1m',
+        expiresIn: '2h',
       },
     );
 
@@ -28,6 +28,9 @@ export class TokenSender {
         expiresIn: '3d',
       },
     );
+    // console.log('Access Token Secret:', this.config.get<string>('ACCESS_TOKEN_SECRET'));
+    // console.log('Refresh Token Secret:', this.config.get<string>('REFRESH_TOKEN_SECRET'));
     return { user, accessToken, refreshToken };
+
   }
 }
