@@ -173,6 +173,15 @@ export class UsersService {
     return { user, refreshToken, accessToken };
   }
 
+  // log out user
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  async logout(req: any) {
+    req.user = null;
+    req.refreshtoken = null;
+    req.accesstoken = null;
+    return { message: 'Logged out successfully!' };
+  }
+
   // Get all users service
   async getUsers() {
     return this.prisma.user.findMany({});

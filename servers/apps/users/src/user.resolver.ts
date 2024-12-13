@@ -5,6 +5,7 @@ import {
   RegisterResponse,
   ActivationResponse,
   LoginResponse,
+  LogoutResposne
 } from './types/user.type';
 import { RegisterDto, ActivationDto } from './dto/user.dto';
 import { User } from './entities/user.entity';
@@ -45,6 +46,12 @@ export class UsersResolver {
   @UseGuards(AuthGuard)
   async getLoggedInUser(@Context() context: { req: Request }) {
     return await this.usersService.getLoggedInUser(context.req);
+  }
+
+  @Query(() => LogoutResposne)
+  @UseGuards(AuthGuard)
+  async logOutUser(@Context() context: { req: Request }) {
+    return await this.usersService.logout(context.req);
   }
 
   @Mutation(() => ActivationResponse)
