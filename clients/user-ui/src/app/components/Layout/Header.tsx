@@ -9,7 +9,7 @@ const Header = () => {
         <header className="w-full h-[80px] bg-[#0F1524] flex items-center">
             <div className="w-[90%] m-auto flex items-center justify-between">
                 <h1 className={`${styles.logo}`}>
-                Food-Delivery
+                Foodie
                 </h1>
                 <NavItems />
                 <ProfileDropDown />
