@@ -8,29 +8,42 @@ import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const formSchema = z.object({
+    name: z.string().min(3, "Name must be at least 3 characters long!"),
     email: z.string().email(),
     password: z.string().min(8, "Password must be at least 8characters long!"),
+    phone_number: z
+    .number()
+    .min(10, "Phone number must be at least 10 characters!"),
   });
   
-  type LoginSchema = z.infer<typeof formSchema>;
+  type SignupSchema = z.infer<typeof formSchema>;
 
-const Login = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
-
-    const {register,handleSubmit, formState: {errors, isSubmitting},reset} = useForm<LoginSchema>({
-        resolver: zodResolver(formSchema),
-    })
-
-    const [show, setShow] = useState(false);
-
-    const onSubmit = (data: LoginSchema) => {
-        console.log(data);
-        reset();
-    }
+const Signup = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
+    const {register,handleSubmit, formState: {errors, isSubmitting},reset} = useForm<SignupSchema>({
+            resolver: zodResolver(formSchema),
+        })
+    
+        const [show, setShow] = useState(false);
+    
+        const onSubmit = (data: SignupSchema) => {
+            console.log(data);
+            reset();
+        }
 
     return (
     <div>
-      <h1 className={`${styles.title}`}>Login</h1>
+      <h1 className={`${styles.title}`}>Signup</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="w-full relative mb-3">
+      <label className={`${styles.label}`}>Enter your Name</label>
+          <input
+            {...register("name")}
+            type="text"
+            placeholder="johndoe**"
+            className={`${styles.input}`}
+          />
+      </div>
+
       <label className={`${styles.label}`}>Enter your Email</label>
       <input {...register("email")} 
         type="email" placeholder="loginmail@gmail.com" className={`${styles.input}`} 
@@ -41,6 +54,22 @@ const Login = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
                 {`${errors.email.message}`}
             </span>
         )}
+
+        <div className="w-full relative mt-3">
+          <label className={`${styles.label}`}>Enter your Phone Number</label>
+          <input
+            {...register("phone_number", { valueAsNumber: true })}
+            type="number"
+            placeholder="+9401*******"
+            className={`${styles.input}`}
+          />
+          {errors.phone_number && (
+            <span className="text-red-500 block mt-1">
+              {`${errors.phone_number.message}`}
+            </span>
+          )}
+        </div>
+
         <div className="w-full mt-5 relative mb-1">
             <label htmlFor="password" className={`${styles.label}`}>
                 Enter your password
@@ -52,7 +81,9 @@ const Login = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
             placeholder="password!@%"
             className={`${styles.input}`}
           />
-          
+           {errors.password && (
+          <span className="text-red-500">{`${errors.password.message}`}</span>
+        )}
            {!show ? (
             <AiOutlineEyeInvisible
               className="absolute bottom-3 right-2 z-1 cursor-pointer text-white"
@@ -67,18 +98,10 @@ const Login = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
             />
           )}
         </div>
-        {errors.password && (
-          <span className="text-red-500">{`${errors.password.message}`}</span>
-        )}
         <div className="w-full mt-5">
-        <span className={`${styles.label} block text-right cursor-pointer`}
-        style={{ color: '#2190ff' }}
-        >
-            Forgot your password
-        </span>
         <input
             type="submit"
-            value="Login"
+            value="Sign Up"
             disabled={isSubmitting}
             className={`${styles.button} mt-3`}
           />
@@ -92,10 +115,10 @@ const Login = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
           <AiFillGithub size={30} className="cursor-pointer ml-2 text-white"/>
         </div>
         <h5 className="text-center pt-4 font-Poppins text-[14px] text-white">
-          Not have any account?
-          <span className="text-[#2190ff] pl-1 cursor-pointer" onClick={() => setActiveState("Signup")}
+          Already have an account?
+          <span className="text-[#2190ff] pl-1 cursor-pointer" onClick={() => setActiveState("Login")}
             >
-                Sign up
+                Login
             </span>
         </h5>
         <br />
@@ -104,4 +127,4 @@ const Login = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
     )
 }
 
-export default Login;
+export default Signup;
