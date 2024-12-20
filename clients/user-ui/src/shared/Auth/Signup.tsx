@@ -6,6 +6,9 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useMutation } from "@apollo/client";
+import { REGISTER_USER } from "../../graphql/actions/register.action";
+import toast from "react-hot-toast";
 
 const formSchema = z.object({
     name: z.string().min(3, "Name must be at least 3 characters long!"),
@@ -19,15 +22,34 @@ const formSchema = z.object({
   type SignupSchema = z.infer<typeof formSchema>;
 
 const Signup = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
+
+    const [registerUserMutation, { loading }] = useMutation(REGISTER_USER);
+
     const {register,handleSubmit, formState: {errors, isSubmitting},reset} = useForm<SignupSchema>({
             resolver: zodResolver(formSchema),
         })
     
         const [show, setShow] = useState(false);
     
-        const onSubmit = (data: SignupSchema) => {
-            console.log(data);
-            reset();
+        const onSubmit = async (data: SignupSchema) => {
+            // console.log(data);
+            // reset();
+            try {
+                const response = await registerUserMutation({
+                  variables: data,
+                });
+                console.log(response.data);
+                toast.success(response.data.message);
+                // localStorage.setItem(
+                //   "activation_token",
+                //   response.data.register.activation_token
+                // );
+                // toast.success("Please check your email to activate your account!");
+                // reset();
+                // setActiveState("Verification");
+              } catch (error: any) {
+                toast.error(error.message);
+              }
         }
 
     return (
@@ -102,7 +124,7 @@ const Signup = ({ setActiveState } :{ setActiveState: (e: string) => void }) => 
         <input
             type="submit"
             value="Sign Up"
-            disabled={isSubmitting}
+            disabled={isSubmitting || loading}
             className={`${styles.button} mt-3`}
           />
         </div>
