@@ -1,14 +1,16 @@
 import { useState } from "react";
 import Login from "../shared/Auth/Login";
 import Signup from "../shared/Auth/Signup";
+import Verification from "../shared/Auth/Verification";
 
 const AuthScreen = () => {
-    const [activeState, setActiveState] = useState("Login");
+    const [activeState, setActiveState] = useState("Verification");
     return (
         <div className="w-full fixed top-0 left-0 h-screen z-50 flex items-center justify-center bg-[#00000027]">
             <div className="w-[400px] bg-slate-900 rounded shadow-sm p-6 relative">
                 {activeState == "Login" && <Login setActiveState={setActiveState}/>}
                 {activeState == "Signup" && <Signup setActiveState={setActiveState}/>}
+                {activeState == "Verification" && <Verification setActiveState={setActiveState}/>}
             </div>
            
         </div>

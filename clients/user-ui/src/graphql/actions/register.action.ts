@@ -4,8 +4,8 @@ import { gql, DocumentNode } from "@apollo/client";
 export const REGISTER_USER: DocumentNode = gql`
   mutation RegisterUser(
     $name: String!
-    $password: String!
     $email: String!
+    $password: String!
     $phone_number: Float!
   ) {
     register(

@@ -30,27 +30,26 @@ const Signup = ({ setActiveState } :{ setActiveState: (e: string) => void }) => 
         })
     
         const [show, setShow] = useState(false);
-    
+
         const onSubmit = async (data: SignupSchema) => {
-            // console.log(data);
-            // reset();
-            try {
-                const response = await registerUserMutation({
-                  variables: data,
-                });
-                console.log(response.data);
-                toast.success(response.data.message);
-                // localStorage.setItem(
-                //   "activation_token",
-                //   response.data.register.activation_token
-                // );
-                // toast.success("Please check your email to activate your account!");
-                // reset();
-                // setActiveState("Verification");
-              } catch (error: any) {
-                toast.error(error.message);
-              }
-        }
+          console.log('Submitting data:', data);
+          try {
+            const response = await registerUserMutation({
+              variables: data,
+            });
+            console.log(response.data)
+            localStorage.setItem(
+              "activation_token",
+              response.data.register.activation_token
+            );
+            toast.success("Please check your email to activate your account!");
+            reset();
+            setActiveState("Verification");
+          } catch (error: any) {
+            console.error(error);
+            toast.error(error.message);
+          }
+        };
 
     return (
     <div>
@@ -103,9 +102,7 @@ const Signup = ({ setActiveState } :{ setActiveState: (e: string) => void }) => 
             placeholder="password!@%"
             className={`${styles.input}`}
           />
-           {errors.password && (
-          <span className="text-red-500">{`${errors.password.message}`}</span>
-        )}
+           
            {!show ? (
             <AiOutlineEyeInvisible
               className="absolute bottom-3 right-2 z-1 cursor-pointer text-white"
@@ -120,6 +117,9 @@ const Signup = ({ setActiveState } :{ setActiveState: (e: string) => void }) => 
             />
           )}
         </div>
+        {errors.password && (
+          <span className="text-red-500 mt-1">{`${errors.password.message}`}</span>
+        )}
         <div className="w-full mt-5">
         <input
             type="submit"
