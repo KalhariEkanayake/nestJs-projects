@@ -6,6 +6,10 @@ import { FcGoogle } from "react-icons/fc";
 import { AiFillGithub } from "react-icons/ai";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../../graphql/actions/login.action";
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -14,7 +18,12 @@ const formSchema = z.object({
   
   type LoginSchema = z.infer<typeof formSchema>;
 
-const Login = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
+  const Login = ({ setActiveState, setOpen 
+  }: { 
+    setActiveState: (e: string) => void; 
+    setOpen: (e: boolean) => void; 
+  }) => {
+  const [Login, { loading }] = useMutation(LOGIN_USER);
 
     const {register,handleSubmit, formState: {errors, isSubmitting},reset} = useForm<LoginSchema>({
         resolver: zodResolver(formSchema),
@@ -22,10 +31,31 @@ const Login = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
 
     const [show, setShow] = useState(false);
 
-    const onSubmit = (data: LoginSchema) => {
-        console.log(data);
+    // const onSubmit = (data: LoginSchema) => {
+    //     console.log(data);
+    //     reset();
+    // }
+
+    const onSubmit = async (data: LoginSchema) => {
+      const loginData = {
+        email: data.email,
+        password: data.password,
+      };
+      console.log(data);
+      const response = await Login({
+        variables: loginData,
+      });
+      if (response.data.login.user) {
+        toast.success("Login Successful!");
+        Cookies.set("refresh_token", response.data.login.refreshToken);
+        Cookies.set("access_token", response.data.login.accessToken);
+        setOpen(false);
         reset();
-    }
+        window.location.reload();
+      } else {
+        toast.error(response.data.login.error.message);
+      }
+    };
 
     return (
     <div>
@@ -79,7 +109,7 @@ const Login = ({ setActiveState } :{ setActiveState: (e: string) => void }) => {
         <input
             type="submit"
             value="Login"
-            disabled={isSubmitting}
+            disabled={isSubmitting || loading}
             className={`${styles.button} mt-3`}
           />
         </div>
