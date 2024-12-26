@@ -103,6 +103,7 @@ const formSchema = z.object({
         <div className="w-full mt-5">
         <span className={`${styles.label} block text-right cursor-pointer`}
         style={{ color: '#2190ff' }}
+        onClick={() => setActiveState("Forgot-Password")}
         >
             Forgot your password
         </span>

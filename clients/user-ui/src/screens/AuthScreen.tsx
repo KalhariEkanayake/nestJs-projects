@@ -2,6 +2,7 @@ import { useState } from "react";
 import Login from "../shared/Auth/Login";
 import Signup from "../shared/Auth/Signup";
 import Verification from "../shared/Auth/Verification";
+import ForgotPassword from "../shared/Auth/ForgotPassword";
 
 const AuthScreen = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
     const [activeState, setActiveState] = useState("Login");
@@ -18,9 +19,10 @@ const AuthScreen = ({ setOpen }: { setOpen: (e: boolean) => void }) => {
         onClick={handleClose}
         >
             <div className="w-[400px] bg-slate-900 rounded shadow-sm p-6 relative">
-                {activeState == "Login" && <Login setActiveState={setActiveState} setOpen={setOpen} />}
-                {activeState == "Signup" && <Signup setActiveState={setActiveState}/>}
-                {activeState == "Verification" && <Verification setActiveState={setActiveState}/>}
+                {activeState === "Login" && <Login setActiveState={setActiveState} setOpen={setOpen} />}
+                {activeState === "Signup" && <Signup setActiveState={setActiveState}/>}
+                {activeState === "Verification" && <Verification setActiveState={setActiveState}/>}
+                {activeState === "Forgot-Password" && <ForgotPassword setActiveState={setActiveState}/>}
             </div>
            
         </div>
