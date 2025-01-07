@@ -7,7 +7,7 @@ const navItems = [
   },
   {
     title: "About us",
-    url: "/about",
+    url: "/about-us",
   },
   {
     title: "Restaurants",
