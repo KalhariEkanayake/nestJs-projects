@@ -1,6 +1,6 @@
 "use server";
 import prisma from "../lib/prismaDb";
-// import bcrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 const generateRandomPassword = () => {
   const characters =
@@ -32,13 +32,13 @@ export const registerUser = async (userData: any) => {
 
   const password = generateRandomPassword();
 
-//   const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   const user = await prisma.user.create({
     data: {
       name: userData.name,
       email: userData.email,
-      password,
+      password: hashedPassword,
       role: "User",
     },
   });
