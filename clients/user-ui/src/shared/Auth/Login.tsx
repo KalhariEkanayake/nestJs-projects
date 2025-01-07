@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../../graphql/actions/login.action";
+import { signIn } from "next-auth/react"
 
 const formSchema = z.object({
     email: z.string().email(),
@@ -118,9 +119,10 @@ const formSchema = z.object({
         <h5 className="text-center pt-4 font-Poppins text-[16px] text-white">
           Or join with
         </h5>
-        <div className="flex items-center justify-center my-3">
+        <div className="flex items-center justify-center my-3"
+        onClick={() => signIn()}>
           <FcGoogle size={30} className="cursor-pointer mr-2" />
-          <AiFillGithub size={30} className="cursor-pointer ml-2 text-white"/>
+          {/* <AiFillGithub size={30} className="cursor-pointer ml-2 text-white"/> */}
         </div>
         <h5 className="text-center pt-4 font-Poppins text-[14px] text-white">
           Not have any account?
