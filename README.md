@@ -1,5 +1,5 @@
 # Food-Delivery Web Application
-This project focuses on developing a comprehensive Food Delivery Web Application using Microservice Architecture. 
+This project focuses on developing a comprehensive Food Delivery Web Application using Microservice Architecture.
 
 ## Demo Video
 https://github.com/user-attachments/assets/08dd50b4-b72b-4165-af2a-d772740b0002
@@ -36,17 +36,18 @@ $ npm install
 ```
 $ cd servers\apps\gateway
 $ npm run start:dev users
-This will open a local URL in your default web browser, such as ```http://localhost:4001/graphql```.
 ```
+This will open a local URL in your default web browser, such as ```http://localhost:4001/graphql```.
 
-***3. Start the Client:***
+***4. Start the Client:***
 ```
 $ cd clients\user-ui
 $ npm run dev
-This will open a local URL in your default web browser, such as ```http://localhost:3000```.
 ```
+This will open a local URL in your default web browser, such as ```http://localhost:3000```.
 
-***3. Start the Prisma Studio:***
+
+***5. Start the Prisma Studio:***
 ```
 $ cd clients\user-ui
 $ npx prisma studio
